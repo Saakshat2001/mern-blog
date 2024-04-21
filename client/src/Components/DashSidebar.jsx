@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Sidebar } from "flowbite-react";
 import { useLocation } from "react-router-dom";
 import { HiUser, HiArrowSmRight } from "react-icons/hi";
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 export default function DashSidebar() {
   const location = useLocation();
   const [tab, setTab] = useState("");
+  const filePickerRef = useRef();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -27,6 +28,7 @@ export default function DashSidebar() {
               icon={HiUser}
               label={"User"}
               labelColor="dark"
+              as="div"
             >
               Profile
             </Sidebar.Item>
