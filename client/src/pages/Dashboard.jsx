@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import userSlice from "../redux/user/userSlice";
 import DashSidebar from "../Components/DashSidebar";
 import DashProfile from "../Components/DashProfile";
+import Dashposts from "../Components/Dashposts";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -28,6 +29,7 @@ export default function Dashboard() {
 
       {tab === "profile" && <DashProfile />}
       {/* { profile} */}
+      {tab === 'posts' && <Dashposts />}
     </div>
   );
 }
