@@ -18,7 +18,7 @@ export const signup = async (req, res, next) => {
   }
 
   const hashedPassword = bcryptjs.hashSync(password, 10);
-  console.log(hashedPassword);
+  
   const newUser = new User({
     username,
     email,
@@ -34,7 +34,9 @@ export const signup = async (req, res, next) => {
 };
 
 export const signin = async (req, res, next) => {
+  console.log('---------============= >>>> ', req);
   const { email, password } = req.body;
+
   if (!email || !password || email === "" || password === "") {
     return next(errorHandler(400, "All fields are required"));
   }
@@ -53,8 +55,9 @@ export const signin = async (req, res, next) => {
     const token = jwt.sign(
       {
         //this token will be stored on cookies . this id will be encrypted based on a key
-        //users of this website are going to have a cookie encryoted by this secret key
+        //users of this website are going to have a cookie encryted by this secret key
         id: validUser._id,
+        isAdmin: validUser.isAdmin
       },
       process.env.JWT_SECRET
     );
