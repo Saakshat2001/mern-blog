@@ -67,27 +67,7 @@ export default function Dashposts() {
     }
   };
 
-  // const handleDeletePost = async () => {
-  //   setShowModal(false);
-  //   try {
-  //     const res = await fetch(
-  //       `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
-  //       {
-  //         method: "DELETE",
-  //       }
-  //     );
-  //     const data = await res.json();
-  //     if (!res.ok) {
-  //       console.log(data.message);
-  //     } else {
-  //       setUserPosts((prev) =>
-  //         prev.filter((post) => post._id !== postIdToDelete)
-  //       );
-  //     }
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // };
+  
   return (
   
        <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar 
