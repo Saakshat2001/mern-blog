@@ -6,7 +6,7 @@ import userSlice from "../redux/user/userSlice";
 import DashSidebar from "../Components/DashSidebar";
 import DashProfile from "../Components/DashProfile";
 import Dashposts from "../Components/Dashposts";
-
+import DashUsers from  "../Components/DashUsers";
 export default function Dashboard() {
   const location = useLocation();
   const [tab, setTab] = useState("");
@@ -30,6 +30,8 @@ export default function Dashboard() {
       {tab === "profile" && <DashProfile />}
       {/* { profile} */}
       {tab === 'posts' && <Dashposts />}
+       {/* { users} */}
+       {tab === 'users' && <DashUsers />}
     </div>
   );
 }
