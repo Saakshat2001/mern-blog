@@ -49,9 +49,23 @@ export default function DashUsers() {
     }
   };
 
-  const handleDeleteUser = async () =>{
+          const handleDeleteUser = async () =>{
+                     try{
+                    const res = await fetch(`/api/user/delete/${userIdToDelete}` , {
+                      method : 'DELETE',
+                    });
+                    const data = await res.json();
+                    if(res.ok){
+                      setUsers((prev) => prev.filter((users) => users._id !== userIdToDelete));
+                      setShowModal(false);
+                    }
 
-  }
+                     }catch(err){
+                        console.log(err.message);
+                     }
+
+
+                  }
   return (
   
        <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar 
