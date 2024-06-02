@@ -4,12 +4,14 @@ import { useParams,Link } from 'react-router-dom'
 import {Button, Spinner} from 'flowbite-react'
 import CallToActions from '../Components/CallToActions';
 import CommentSection from '../Components/CommentSection';
+import PostCard from '../Components/PostCard';
 
 export default function PostPage() {
     const {postSlug} = useParams();
     const [loading , setLoading] = useState(true);
     const [post , setPost] = useState(null);
     const [error , setError] = useState(null);
+    const [recentPosts , setRecentPosts] = useState(null);
 
     useEffect(()=>{
      const fetchPosts = async() => {
@@ -37,6 +39,21 @@ export default function PostPage() {
      fetchPosts();
     } , [postSlug])
   
+    useEffect(()=>{
+      try {
+        const fetchRecentPosts = async () => {
+          const res = await fetch(`/api/post/getposts?limit=3`);
+          const data = await res.json();
+          if (res.ok) {
+            setRecentPosts(data.posts);
+          }
+        };
+        console.log(recentPosts , '-=++++++++++++++++++++ ')
+        fetchRecentPosts();
+      } catch (error) {
+        console.log(error.message);
+      }
+    },[])
     if(loading){
         return <div className='flex justify-center items-center min-h-screen'>
             <Spinner size='xl' />
@@ -59,10 +76,20 @@ export default function PostPage() {
         <span className='italic' >{post && (post.content.length / 1000).toFixed(0)} mins read</span>
       </div>
       <div className='p-3 max-w-2xl mx-auto w-full post-content' dangerouslySetInnerHTML={{__html: post && post.content}}></div>
-   <div className='max-w-4xl mx-auto w-full'>
-   <CallToActions />
-   </div>
-   <CommentSection postId={post._id}/>
+      <div className='max-w-4xl mx-auto w-full'>
+      <CallToActions />
+      </div>
+    <CommentSection postId={post._id}/>
+    <div className='flex flex-col justify-center items-center mb-5'>
+      <h1 className='text-x(l mt-5'>Recent Articles</h1>
+      <div className='flex flex-wrap gap-5 mt-5 justify-center'>
+        {
+          recentPosts && recentPosts.map((post) => 
+              <PostCard key={post._id} post={post} />
+          )
+          }
+      </div>
+    </div>
     </main>
   
   )
