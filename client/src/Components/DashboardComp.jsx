@@ -180,7 +180,7 @@ export default function DashboardComp() {
             <div className='flex justify-between  p-3 text-sm font-semibold'>
                 <h1 className='text-center p-2'> Recent Posts</h1>
                 <Button outline gradientDuoTone='purpleToPink'>
-                <Link to={'/dashboard?tab=users'}>See all</Link>
+                <Link to={'/dashboard?tab=posts'}>See all</Link>
                 </Button>
             </div>
             <Table hoverable>
