@@ -22,3 +22,23 @@ export const findproductinfo = async(req,res) => {
     //  res.json({message: 'Product Created'});
   
   }
+
+  export const deleteCard = async(req,res) => {
+
+    try{
+        console.log('aara ');
+        
+        const card = await Product.findById(req.params.cardId);
+        console.log(req.params.cardId , card , '------>>>>>>>.');
+        
+        if(!card){
+            return res.status(404).json({ message: 'Card not found' });
+        }
+       // res.status(200).json({message : 'Card deleted' });
+          await Product.findByIdAndDelete(req.params.cardId);
+          res.status(200).json({message : 'Card has been deleted'});
+          
+    }catch(error){
+        res.status(500).json({ message: 'Server errorrrr' });
+    }
+}
