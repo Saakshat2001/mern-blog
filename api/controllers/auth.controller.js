@@ -6,14 +6,11 @@ import Product from "../models/product.model.js";
 import User1 from "../models/user.model.js";
 
 export const signup = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const {  email,name ,password } = req.body;
   if (
-    !username ||
+    !name ||
     !email ||
-    !password ||
-    username === "" ||
-    email === "" ||
-    password === ""
+    !password 
   ) {
     // return res.status(400).json({message : 'All fields are required'});
     return next(errorHandler(400, "All fields are required"));
@@ -21,7 +18,7 @@ export const signup = async (req, res, next) => {
 
   const hashedPassword = bcryptjs.hashSync(password, 10);
   
-  const newUser = new User({
+  const newUser = new User1({
     username,
     email,
     password: hashedPassword,
