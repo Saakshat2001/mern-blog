@@ -35,7 +35,7 @@ export const signup = async (req, res, next) => {
   return 1;
 };
 
-export const signin1 = async (req, res, next) => {
+export const signin = async (req, res, next) => {
   console.log('---------============= >>>> ', req);
   const { email, password } = req.body;
 
@@ -117,7 +117,7 @@ export const google = async (req, res, next) => {
   }
 };
 
-export const signIn = async(req,res) => {
+export const signInForMobapp = async(req,res) => {
   console.log(req.body , 'req body --------->>>>>>>>>>>>>>>>>>>>>>> ');
   const {email, name, password} = req.body;
   const newUser = new User1({
