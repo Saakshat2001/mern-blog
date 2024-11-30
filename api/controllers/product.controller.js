@@ -42,3 +42,33 @@ export const findproductinfo = async(req,res) => {
         res.status(500).json({ message: 'Server errorrrr' });
     }
 }
+
+export const editCard = async(req,res) => {
+    try{
+        const card = await Product.findById(req.params.cardId);
+        // if(!card){
+        //     return next(errorHandler(404 , 'Comment not found'));
+        // }
+     
+   console.log('in edit card --------------------- ');
+   
+          const editedComment = await Product.findByIdAndUpdate(req.params.cardId,
+            {
+                product : req.body.product,
+                brand : req.body.brand,
+                modelNumber : req.body.modelNumber,
+                Comments : req.body.Comments,
+                dealer : req.body.dealer,
+                dealerContactNumber : req.body.dealerContactNumber,
+                purchaseDate : req.body.purchaseDate,
+                warrantyEndDate : req.body.warrantyEndDate
+            },
+            {new : true}
+          );
+          res.status(200).json({message : 'Card has been edited'});
+
+}catch(err){
+    res.status(500).json({ message: 'Server error' });
+    //next(err);
+}
+}
